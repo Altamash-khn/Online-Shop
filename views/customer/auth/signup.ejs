@@ -1,32 +1,35 @@
 <%- include('../includes/head', {pageTitle: 'Signup'}) %>
+<link rel="stylesheet" href="/styles/forms.css" />
+<link rel="stylesheet" href="/styles/auth.css" />
+</head>
 <body>
   <%- include('../includes/header') %>
   <main>
     <h1>Create New Account</h1>
     <form action="" method="">
       <div>
-        <label for="email">Email:</label>
+        <label for="email">Email</label>
         <input type="email" name="email" id="email" required>
       </div>
       <div>
-        <label for="confirm-email">Confirm email:</label>
+        <label for="confirm-email">Confirm email</label>
         <input type="email" name="confirm-email" id="confirm-email" required>
       </div>
       <div>
-        <label for="password">Password:</label>
+        <label for="password">Password</label>
         <input type="password" name="password" id="password" minlength="6" required>
       </div>
       <hr>
       <div>
-        <label for="fullname">Full Name:</label>
+        <label for="fullname">Full Name</label>
         <input type="text" name="fullname" id="fullname" required>
       </div>
       <div>
-        <label for="street">Street:</label>
+        <label for="street">Street</label>
         <input type="text" name="street" id="street" required>
       </div>
       <div>
-        <label for="postal">Postal Code:</label>
+        <label for="postal">Postal Code</label>
         <input type="text" name="postal" id="postal" required>
       </div>
       <div>
@@ -34,6 +37,7 @@
         <input type="text" id="city" name="city" required>
       </div>
       <button class="btn">Create Account</button>
+      <p id="switch-form"><a href="/login">Login instead</a></p>
     </form>
   </main>
 </body>
