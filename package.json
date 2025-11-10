@@ -11,6 +11,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@dr.pogodin/csurf": "^1.16.6",
+    "bcryptjs": "^3.0.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "mongodb": "^7.0.0"
