@@ -6,7 +6,7 @@
 
 html {
   font-family: "Montserrat", sans-serif;
-  --arif: 
+  --arif: ;
 }
 
 :root {
@@ -80,7 +80,12 @@ a {
   margin: var(--space-4) 0;
 }
 
-.btn:hover, .btn:active {
-    background-color: var(--color-primary-700);
-    border-color: var(--color-primary-700);
+.btn:hover,
+.btn:active {
+  background-color: var(--color-primary-700);
+  border-color: var(--color-primary-700);
+}
+
+.server-error {
+  margin: 2rem 0;
 }

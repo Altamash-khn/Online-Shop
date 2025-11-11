@@ -4,21 +4,20 @@ const csrf = require("@dr.pogodin/csurf");
 const app = express();
 const authRoutes = require("./routes/auth-routes");
 const { connectToDatabase } = require("./data/database");
+const errorHandlerMiddleware = require("./middlewares/error-handler");
+// const addCSRFTokenMiddleware = require("./middlewares/csrf-token");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
-app.use(csrf());
-
-app.use(function (req, res, next) {
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});
+// app.use(csrf());
+// app.use(addCSRFTokenMiddleware);
 
 app.use(authRoutes);
 
+app.use(errorHandlerMiddleware);
 connectToDatabase()
   .then(() => app.listen(3000))
   .catch((err) => {
