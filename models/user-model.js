@@ -14,28 +14,33 @@ class User {
     };
   }
 
-  // async signup() {
-  //   const hashedPassword = await bcrypt.hash(this.password, 12);
-  //   await db.getDb().collection("users").insertOne({
-  //     email: this.email,
-  //     password: hashedPassword,
-  //     name: this.name,
-  //     address: this.address,
-  //   });
-  // }
-  signup() {
-    return bcrypt.hash(this.password, 12).then((hashedPassword) => {
-      db.getDb().collection("users").insertOne({
-        email: this.email,
-        password: hashedPassword,
-        name: this.name,
-        address: this.address,
-      });
+  async signup() {
+    const hashedPassword = await bcrypt.hash(this.password, 12);
+    await db.getDb().collection("users").insertOne({
+      email: this.email,
+      password: hashedPassword,
+      name: this.name,
+      address: this.address,
     });
   }
+  // signup() {
+  //   return bcrypt.hash(this.password, 12).then((hashedPassword) => {
+  //     db.getDb().collection("users").insertOne({
+  //       email: this.email,
+  //       password: hashedPassword,
+  //       name: this.name,
+  //       address: this.address,
+  //     });
+  //   });
+  // }
 
   getUserWithSameEmail() {
     return db.getDb().collection("users").findOne({ email: this.email });
+  }
+
+  async existsAlready() {
+    const existingUser = await this.getUserWithSameEmail();
+    return existingUser ? true : false;
   }
 
   hasMatchingPassword(hashedPassword) {
