@@ -1,4 +1,12 @@
 <header>
   <div><a href="/">BE</a></div>
-  <nav></nav>
+  <nav>
+    <ul>
+      <% if(locals.isAuth){ %>
+        <li>
+          <button>logout</button>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
 </header>

@@ -5,10 +5,14 @@ const csrf = require("@dr.pogodin/csurf");
 const expressSession = require("express-session");
 
 const authRoutes = require("./routes/auth-routes");
+const productsRoutes = require("./routes/products-routes");
+const baseRoutes = require("./routes/base-routes");
+
 const { connectToDatabase } = require("./data/database");
-const errorHandlerMiddleware = require("./middlewares/error-handler");
 const createSessionConfig = require("./config/session");
+const errorHandlerMiddleware = require("./middlewares/error-handler");
 const addCSRFTokenMiddleware = require("./middlewares/csrf-token");
+const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 
 const app = express();
 
@@ -22,9 +26,13 @@ const sessionConfig = createSessionConfig();
 
 app.use(expressSession(sessionConfig));
 app.use(csrf());
-app.use(addCSRFTokenMiddleware);
 
+app.use(addCSRFTokenMiddleware);
+app.use(checkAuthStatusMiddleware);
+
+app.use(baseRoutes);
 app.use(authRoutes);
+app.use(productsRoutes);
 
 app.use(errorHandlerMiddleware);
 
