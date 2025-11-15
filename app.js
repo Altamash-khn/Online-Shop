@@ -7,6 +7,7 @@ const expressSession = require("express-session");
 const authRoutes = require("./routes/auth-routes");
 const productsRoutes = require("./routes/products-routes");
 const baseRoutes = require("./routes/base-routes");
+const adminRoutes = require("./routes/admin-routes");
 
 const { connectToDatabase } = require("./data/database");
 const createSessionConfig = require("./config/session");
@@ -33,6 +34,7 @@ app.use(checkAuthStatusMiddleware);
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use("/admin", adminRoutes);
 
 app.use(errorHandlerMiddleware);
 
