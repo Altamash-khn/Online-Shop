@@ -5,8 +5,9 @@
   <%- include('../../shared/includes/header') %>
   <main>
     <h1>Product Administration</h1>
-    <form action="/admin/products" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>"> <!-- this shouldn't be added because encType to multipart/form-data doesn't supports this input here and so this should fail!!! instead here i can simply add the _csrf=<%= locals.csrfToken %> as a query paramter -->
+    <form action="/admin/products?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
+      <!-- <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">  -->
+      <!-- this shouldn't be added because encType to multipart/form-data doesn't supports this input here and so this should fail!!! instead here i can simply add the _csrf=<%= locals.csrfToken %> as a query paramter -->
       <div>
         <label for="title">Title</label>
         <input type="text" id="title" name="title" required>
