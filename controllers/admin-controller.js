@@ -14,17 +14,33 @@ function getNewProducts(req, res) {
   res.render("admin/products/new-product");
 }
 
-async function createNewProduct(req, res, next) {
-  // MY CODE
-  // const { title, summary, price, description } = req.body;
-  // const { path } = req.file;
-  // const product = new Product(title, path, summary, price, description);
-  // await product.saveProduct();
+// async function createNewProduct(req, res, next) {
+//   // MY CODE
+//   // const { title, summary, price, description } = req.body;
+//   // const { path } = req.file;
+//   // const product = new Product(title, path, summary, price, description);
+//   // await product.saveProduct();
 
-  // INSTRUCTORS CODE
+//   // INSTRUCTORS CODE
+//   const product = new Product({
+//     ...req.body,
+//     image: req.file.filename,
+//   });
+
+//   try {
+//     await product.save();
+//   } catch (error) {
+//     next(error);
+//     return;
+//   }
+//   res.redirect("/admin/products");
+// }
+
+async function createNewProduct(req, res, next) {
   const product = new Product({
     ...req.body,
-    image: req.file.filename,
+    imageUrl: req.file.path, // Cloudinary URL
+    imagePublicId: req.file.filename // Cloudinary public ID
   });
 
   try {
@@ -33,7 +49,9 @@ async function createNewProduct(req, res, next) {
     next(error);
     return;
   }
+
   res.redirect("/admin/products");
 }
+
 
 module.exports = { getProducts, getNewProducts, createNewProduct };

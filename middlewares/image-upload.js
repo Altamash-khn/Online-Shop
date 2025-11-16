@@ -1,21 +1,16 @@
 const multer = require("multer");
-let uuid;
-(async () => {
-  const uuidModule = await import("uuid");
-  uuid = uuidModule.v4;
-})();
+const cloudinary = require("../utils/cloudinary-config");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-const sotrageConfig = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "product-data/images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, uuid() + "-" + file.originalname);
-  },
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "products",  // folder name on Cloudinary
+    allowed_formats: ["jpg", "jpeg", "png", "webp"]
+  }
 });
 
-const upload = multer({ storage: sotrageConfig });
+const upload = multer({ storage: storage });
 
 const configuredMulterMiddleware = upload.single("image");
-
-module.exports = configuredMulterMiddleware;
+module.exports = configuredMulterMiddleware
