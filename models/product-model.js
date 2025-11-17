@@ -81,6 +81,7 @@ class Product {
       price: this.price,
       description: this.description,
       imageUrl: this.imageUrl,
+      imagePublicId: this.imagePublicId,
     };
 
     await db.getDb().collection("products").insertOne(productData);
