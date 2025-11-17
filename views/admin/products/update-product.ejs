@@ -4,13 +4,8 @@
 <body>
   <%- include('../../shared/includes/header') %>
   <main>
-    <h1>Product Administration</h1>
-    <%- include('includes/product-form', {submitPath: "/admin/products", product:{
-      title: "",
-      summary: "",
-      price: "",
-      description: ""
-    }}) %>
+    <h1>Update Product</h1>
+    <%- include('includes/product-form', {submitPath: "/admin/product/" + product.id, product: product}) %>
   </main>
 </body>
 </html>

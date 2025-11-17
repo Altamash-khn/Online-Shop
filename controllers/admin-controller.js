@@ -40,7 +40,7 @@ async function createNewProduct(req, res, next) {
   const product = new Product({
     ...req.body,
     imageUrl: req.file.path, // Cloudinary URL
-    imagePublicId: req.file.filename // Cloudinary public ID
+    imagePublicId: req.file.filename, // Cloudinary public ID
   });
 
   try {
@@ -53,5 +53,21 @@ async function createNewProduct(req, res, next) {
   res.redirect("/admin/products");
 }
 
+async function getUpdateProduct(req, res, next) {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.render("admin/products/update-product", { product: product });
+  } catch (error) {
+    next(error);
+  }
+}
 
-module.exports = { getProducts, getNewProducts, createNewProduct };
+function updateProduct() {}
+
+module.exports = {
+  getProducts,
+  getNewProducts,
+  createNewProduct,
+  getUpdateProduct,
+  updateProduct,
+};
