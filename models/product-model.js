@@ -1,6 +1,7 @@
 const mongodb = require("mongodb");
 const db = require("../data/database");
 class Product {
+
   constructor(productData) {
     this.title = productData.title;
     this.summary = productData.summary;
@@ -49,11 +50,27 @@ class Product {
       summary: this.summary,
       price: this.price,
       description: this.description,
-      imageUrl: this.imageUrl,
-      imagePublicId: this.imagePublicId,
+      // imageUrl: this.imageUrl,
+      // imagePublicId: this.imagePublicId,
     };
 
-    await db.getDb().collection("products").insertOne(productData);
+    if(this.imageUrl){
+      productData.imageUrl = this.imageUrl;
+    }
+
+    if(this.imagePublicId){
+      productData.imagePublicId = this.imagePublicId;
+    }
+
+    if (this.id) { 
+      const prodId = new mongodb.ObjectId(this.id);
+      await db
+        .getDb()
+        .collection("products")
+        .updateOne({ _id: prodId }, { $set: productData }); 
+    } else {
+      await db.getDb().collection("products").insertOne(productData);
+    }
   }
 }
 

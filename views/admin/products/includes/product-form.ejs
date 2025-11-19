@@ -1,4 +1,4 @@
-    <form action="<%= submitPath %>?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
+    <form action="<%= submitPath%>?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
       <!-- <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">  -->
       <!-- this shouldn't be added because encType to multipart/form-data doesn't supports this input here and so this should fail!!! instead here i can simply add the _csrf=<%= locals.csrfToken %> as a query paramter -->
       <div>
@@ -7,7 +7,7 @@
       </div>
       <div>
         <label for="image">Image</label>
-        <input type="file" id="image" name="image" accept="image/png, image/jpg, image/webp" required>
+        <input type="file" id="image" name="image" accept="image/png, image/jpg, image/webp" <% if (imageRequired) { %> required <% } %> >
       </div>
       <div>
         <label for="summary">Summary</label>
