@@ -36,5 +36,4 @@ function csrfToken(req, res, next) {
 
 // countImages();
 
-
 module.exports = csrfToken;

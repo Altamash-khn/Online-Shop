@@ -1,5 +1,6 @@
 function checkAuthStatus(req, res, next) {
   const uid = req.session.uid;
+  console.log("uid", uid);
 
   if (!uid) {
     return next();
