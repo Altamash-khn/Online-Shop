@@ -72,6 +72,11 @@ class Product {
       await db.getDb().collection("products").insertOne(productData);
     }
   }
+
+  remove() {
+    const prodId = new mongodb.ObjectId(this.id);
+    return db.getDb().collection("products").deleteOne({ _id: prodId });
+  }
 }
 
 module.exports = Product;

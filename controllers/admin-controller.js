@@ -69,7 +69,7 @@ async function getUpdateProduct(req, res, next) {
   }
 }
 
-async function updateProduct(req, res, next) {
+async function updateProduct(req, res, next) { 
   let existingProduct;
   
 
@@ -103,8 +103,35 @@ async function updateProduct(req, res, next) {
     next(error);
     return;
   }
-
 }
+
+async function deleteProduct(req, res, next) {
+  let existingProduct;   
+  try {
+    existingProduct = await Product.findById(req.params.id);
+  } catch (error) {
+    next(error);
+    return;
+  }
+
+  if (existingProduct.imagePublicId) {
+    await cloudinary.uploader.destroy(existingProduct.imagePublicId);
+  }
+
+  try {
+    const product = new Product({
+      _id: req.params.id,
+    });
+    await product.remove();
+    // res.redirect("/admin/products");
+    res.json({ message: "Product deleted!" });
+  } catch (error) {
+    next(error);
+    return;
+  }
+}
+
+
 
 module.exports = {
   getProducts,
@@ -112,4 +139,5 @@ module.exports = {
   createNewProduct,
   getUpdateProduct,
   updateProduct,
+  deleteProduct
 };
