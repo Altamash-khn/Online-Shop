@@ -14,6 +14,10 @@ async function addCartItem(req, res, next) {
 
   cart.addItem(product);
   req.session.cart = cart;
+
+  res
+    .status(201)
+    .json({ message: "Cart Updated!", newTotalItems: cart.totalQuantity });
 }
 
 module.exports = { addCartItem };
