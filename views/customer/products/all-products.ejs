@@ -5,11 +5,13 @@
   <%- include('../../shared/includes/header') %>
   <main>
     <h1>All Products</h1>
+    <ul id="products-grid">
     <% for (const product of products) { %>
         <li>
           <%- include('../../shared/includes/product-item', {product: product}) %>
         </li>
     <% } %>
+    </ul>
   </main>
 </body>
 </html>
