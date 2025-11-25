@@ -6,37 +6,42 @@ class Cart {
   }
 
   addItem(product) {
-    const plainProduct = {
-      id: product.id || product._id.toString(),
+  const productId = product.id || product._id.toString();
+
+  const existingItem = this.items.find(item => item.product.id === productId);
+
+  this.totalQuantity++;
+  this.totalPrice += product.price;
+
+  if (existingItem) {
+    existingItem.quantity++;
+    existingItem.totalPrice += product.price;
+    return;
+  }
+
+  this.items.push({
+    product: {
+      id: productId,
       title: product.title,
       price: product.price,
       image: product.image,
       description: product.description,
-    };
+    },
+    quantity: 1,
+    totalPrice: product.price,
+  });
+}
 
-    const cartItem = {
-      product: plainProduct,
-      quantity: 1,
-      totalPrice: product.price,
-    };
+updateItem(productId, newQuantity) {
+  const existingItem = this.items.find(item => item.product.id === productId);
 
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
-      if (item.product.id === product.id) {
-        cartItem.quantity = cartItem.quantity + 1;
-        cartItem.totalPrice = cartItem.totalPrice + product.price;
-        this.items[i] = cartItem;
-
-        this.totalQuantity++;
-        this.totalPrice += product.price;
-        return;
-      }
-    }
-
-    this.items.push(cartItem);
-    this.totalQuantity++;
-    this.totalPrice += product.price;
+  if (!existingItem) {
+    return;
   }
+
+  
+}
+
 }
 
 module.exports = Cart;
