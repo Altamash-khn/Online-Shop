@@ -8,7 +8,7 @@ class Cart {
   addItem(product) {
     const plainProduct = {
       id: product.id || product._id.toString(),
-      name: product.name,
+      title: product.title,
       price: product.price,
       image: product.image,
       description: product.description,

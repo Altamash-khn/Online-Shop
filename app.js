@@ -38,6 +38,11 @@ app.use(cartMiddleWare);
 app.use(addCSRFTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 
+// app.use(function (req, res, next) {
+//   req.session.cart = {};
+//   next()
+// });
+
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
