@@ -10,7 +10,7 @@
       <div id="product-info">
         <h1><%= product.title %></h1>
         <p><%= product.price %></p>
-        <button class="btn" id="add-to-cart-button">Add to Cart</button>
+        <button class="btn" id="add-to-cart-button" data-productId="<%= product._id %>" data-csrftoken="<%= locals.csrfToken %>">Add to Cart</button>
       </div>
     </header>
 

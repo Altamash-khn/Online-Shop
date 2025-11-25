@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth-routes");
 const productsRoutes = require("./routes/products-routes");
 const baseRoutes = require("./routes/base-routes");
 const adminRoutes = require("./routes/admin-routes");
+const cartRoutes = require("./routes/cart-routes");
 
 const { connectToDatabase } = require("./data/database");
 const createSessionConfig = require("./config/session");
@@ -24,11 +25,12 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
-app.use("/products/assets/images", express.static("product-data/images"));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const sessionConfig = createSessionConfig();
 
+// order matters for all these middlewares
 app.use(expressSession(sessionConfig));
 app.use(csrf());
 app.use(cartMiddleWare);
@@ -39,10 +41,11 @@ app.use(checkAuthStatusMiddleware);
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use("/cart", cartRoutes);
 app.use(protectRoutesMiddleware);
 app.use("/admin", adminRoutes);
 
-// app.use(errorHandlerMiddleware);
+app.use(errorHandlerMiddleware);
 
 connectToDatabase()
   .then(() => app.listen(3000))
