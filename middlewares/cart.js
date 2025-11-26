@@ -12,8 +12,6 @@ function intializeCart(req, res, next) {
       req.session.cart.totalPrice
     );
   }
-  console.log("Cart", cart.items[0]);
-
   res.locals.cart = cart;
   next();
 }

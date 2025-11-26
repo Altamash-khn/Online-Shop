@@ -19,10 +19,13 @@ async function addCartItem(req, res, next) {
   req.session.cart = cart;
   console.log("cart", cart);
   
-
   res
     .status(201)
     .json({ message: "Cart Updated!", newTotalItems: cart.totalQuantity });
 }
 
-module.exports = { addCartItem, getCart };
+function updateCartItem(req, res, next) {
+  console.log("Updating item with ID:", req.params.id);
+}
+
+module.exports = { addCartItem, getCart, updateCartItem };

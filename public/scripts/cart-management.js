@@ -28,4 +28,4 @@ addTocartButton.addEventListener("click", async (e) => {
   const newTotalQuantity = resData.newTotalItems;
 
   cartBadge.textContent = newTotalQuantity;
-});
+})
