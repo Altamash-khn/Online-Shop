@@ -36,11 +36,41 @@ updateItem(productId, newQuantity) {
   const existingItem = this.items.find(item => item.product.id === productId);
 
   if (!existingItem) {
-    return;
+    return {
+      updatedItemTotalPrice: 0,
+      newCartTotalPrice: this.totalPrice,
+      newTotalItems: this.totalQuantity
+    };
+  }
+  
+  if (newQuantity <= 0) {
+    this.totalQuantity -= existingItem.quantity;
+    this.totalPrice -= existingItem.totalPrice;
+    this.items = this.items.filter(item => item.product.id !== productId);
+
+    return {
+      updatedItemTotalPrice: 0,
+      newCartTotalPrice: this.totalPrice,
+      newTotalItems: this.totalQuantity
+    };
   }
 
-  
+  this.totalQuantity -= existingItem.quantity;
+  this.totalPrice -= existingItem.totalPrice;
+
+  existingItem.quantity = newQuantity;
+  existingItem.totalPrice = existingItem.product.price * newQuantity;
+
+  this.totalQuantity += newQuantity;
+  this.totalPrice += existingItem.totalPrice;
+
+  return {
+    updatedItemTotalPrice: existingItem.totalPrice,
+    newCartTotalPrice: this.totalPrice,
+    newTotalItems: this.totalQuantity
+  };
 }
+
 
 }
 

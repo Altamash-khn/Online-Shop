@@ -1,6 +1,6 @@
 <%- include('../../shared/includes/head', {pageTitle: 'Your Cart'}) %>
 <link rel="stylesheet" href="/styles/cart.css">
-<script src="/scripts/quantity.js" defer></script>
+<script src="/scripts/cart-item-quantity-management.js" defer></script>
 </head>
 <body>
   <%- include('../../shared/includes/header') %>
@@ -9,13 +9,13 @@
     <ul id="cart-items">
       <% for (const cartItem of locals.cart.items) { %>
         <li>
-          <%- include('includes/cart-item', {item: cartItem}) %>
+          <%- include('includes/cart-item', {item: cartItem, csrfToken: locals.csrfToken}) %>
         </li>
       <% } %>
     </ul>
 
     <div id="cart-total">
-      <p>Total ₹<%= locals.cart.totalPrice.toFixed(2) %></p>
+      <p>Total ₹<span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span></p>
       <button class="btn">Buy Products</button>
     </div>
   </main>

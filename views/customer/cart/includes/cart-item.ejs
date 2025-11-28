@@ -2,15 +2,15 @@
   <div class="cart-item-info">
     <h2><%= item.product.title %></h2>
     <p>
-      ₹<%= item.totalPrice.toFixed(2) %>
+      ₹<span class="cart-item-total-price"><%= item.totalPrice.toFixed(2) %></span>
       <span class="cart-product-price"
         >(₹<%= item.product.price.toFixed(2) %>)</span
       >
     </p>
   </div>
 
-  <div class="cart-item-management">
-    <input type="number" value="<%= item.quantity %>" class="totalQuantity" data-id="<%= item.product.id %>" data-csrf-token="<%= locals.csrfToken %>" required />
-    <button class="btn btn-alt update-btn" disabled>Update</button>
-  </div>
+  <form class="cart-item-management" data-id="<%= item.product.id %>" data-csrf-token="<%= locals.csrfToken %>">
+    <input type="number" value="<%= item.quantity %>" required />
+    <button class="btn btn-alt update-btn">Update</button>
+  </form>
 </article>
