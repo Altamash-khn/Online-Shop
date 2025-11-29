@@ -9,6 +9,7 @@ const productsRoutes = require("./routes/products-routes");
 const baseRoutes = require("./routes/base-routes");
 const adminRoutes = require("./routes/admin-routes");
 const cartRoutes = require("./routes/cart-routes");
+const orderRoutes = require("./routes/order-routes");
 
 const { connectToDatabase } = require("./data/database");
 const createSessionConfig = require("./config/session");
@@ -49,8 +50,9 @@ app.use(productsRoutes);
 app.use("/cart", cartRoutes);
 app.use(protectRoutesMiddleware);
 app.use("/admin", adminRoutes);
+app.use("/orders", orderRoutes);
 
-app.use(errorHandlerMiddleware);
+// app.use(errorHandlerMiddleware);
 
 connectToDatabase()
   .then(() => app.listen(3000))
