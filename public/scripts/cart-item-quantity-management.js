@@ -30,6 +30,8 @@ function updateCart(event) {
       .then((data) => {
         if (data.updatedCartData.updatedItemTotalPrice === 0) {
           event.target.closest("li").remove();
+          cartTotalPriceElement.textContent = data.updatedCartData.newCartTotalPrice.toFixed(2);
+          navCartBadge.textContent = data.updatedCartData.newTotalItems;  
           return;
         }
 

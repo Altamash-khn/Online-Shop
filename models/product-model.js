@@ -1,7 +1,6 @@
 const mongodb = require("mongodb");
 const db = require("../data/database");
 class Product {
-
   constructor(productData) {
     this.title = productData.title;
     this.summary = productData.summary;
@@ -44,6 +43,22 @@ class Product {
     return product;
   }
 
+  static async findMultiple(ids) {
+    const productIds = ids.map(function (id) {
+      return new mongodb.ObjectId(id);
+    });
+
+    const products = await db
+      .getDb()
+      .collection("products")
+      .find({ _id: { $in: productIds } })
+      .toArray();
+
+    return products.map(function (productDocument) {
+      return new Product(productDocument);
+    });
+  }
+
   async save() {
     const productData = {
       title: this.title,
@@ -54,20 +69,20 @@ class Product {
       // imagePublicId: this.imagePublicId,
     };
 
-    if(this.imageUrl){
+    if (this.imageUrl) {
       productData.imageUrl = this.imageUrl;
     }
 
-    if(this.imagePublicId){
+    if (this.imagePublicId) {
       productData.imagePublicId = this.imagePublicId;
     }
 
-    if (this.id) { 
+    if (this.id) {
       const prodId = new mongodb.ObjectId(this.id);
       await db
         .getDb()
         .collection("products")
-        .updateOne({ _id: prodId }, { $set: productData }); 
+        .updateOne({ _id: prodId }, { $set: productData });
     } else {
       await db.getDb().collection("products").insertOne(productData);
     }

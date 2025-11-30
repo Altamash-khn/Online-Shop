@@ -19,6 +19,8 @@ const addCSRFTokenMiddleware = require("./middlewares/csrf-token");
 const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 const protectRoutesMiddleware = require("./middlewares/protect-routes");
 const cartMiddleWare = require("./middlewares/cart");
+const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
+
 
 const app = express();
 
@@ -35,14 +37,10 @@ const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
 app.use(csrf());
 app.use(cartMiddleWare);
+app.use(updateCartPricesMiddleware);
 
 app.use(addCSRFTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
-
-// app.use(function (req, res, next) {
-//   req.session.cart = {};
-//   next()
-// });
 
 app.use(baseRoutes);
 app.use(authRoutes);
@@ -52,7 +50,7 @@ app.use(protectRoutesMiddleware);
 app.use("/admin", adminRoutes);
 app.use("/orders", orderRoutes);
 
-// app.use(errorHandlerMiddleware);
+app.use(errorHandlerMiddleware);
 
 connectToDatabase()
   .then(() => app.listen(3000))
