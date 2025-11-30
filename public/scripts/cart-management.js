@@ -1,5 +1,5 @@
 const addTocartButton = document.querySelector("#add-to-cart-button");
-const cartBadge = document.querySelector(".nav-items .badge");
+const cartBadges = document.querySelectorAll(".nav-items .badge");
 
 addTocartButton.addEventListener("click", async (e) => {
   let res;
@@ -27,5 +27,7 @@ addTocartButton.addEventListener("click", async (e) => {
   const resData = await res.json();
   const newTotalQuantity = resData.newTotalItems;
 
-  cartBadge.textContent = newTotalQuantity;
-})
+  cartBadges.forEach((cartBadge) => {
+    cartBadge.textContent = newTotalQuantity;
+  });
+});

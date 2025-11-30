@@ -20,3 +20,28 @@ form a {
 form a:hover,form a:active {
   color: var(--color-primary-400);
 }
+
+.password-container input{
+  background: transparent;
+  outline: none;
+}
+
+.password-container{
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: var(--border-radius-small);
+}
+
+.password-container .show-icon, 
+.password-container .hide-icon{
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem; 
+}
+
+.password-container .hide-icon{
+  display: none;
+}

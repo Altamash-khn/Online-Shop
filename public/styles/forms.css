@@ -17,6 +17,7 @@ textarea {
   border-radius: var(--border-radius-small);
   border: none;
   width: 90%;
+  outline: none;
 }
 
 #image-upload-control {
