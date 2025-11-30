@@ -4,11 +4,12 @@ const adminController = require("../controllers/admin-controller");
 const imageUploadMiddleware = require("../middlewares/image-upload");
 
 router.get("/products", adminController.getProducts);
+router.get('/orders', adminController.getOrders);
 router.get("/products/new", adminController.getNewProducts);
 router.post("/products", imageUploadMiddleware, adminController.createNewProduct);
 router.get("/products/:id", adminController.getUpdateProduct)
 router.post("/products/:id",imageUploadMiddleware, adminController.updateProduct)
-
+router.patch('/orders/:id', adminController.updateOrder);
 
 // router.get("/products/delete/:id", adminController.deleteProduct);
 router.delete("/products/:id", adminController.deleteProduct); 
