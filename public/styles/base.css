@@ -125,3 +125,8 @@ a {
   background-color: var(--color-primary-500);
   color: var(--color-primary-500-contrast);
 }
+
+
+h1{
+  margin-bottom: 2rem;
+}
