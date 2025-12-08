@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 let database;
 
 async function connectToDatabase() {
-  const client = await MongoClient.connect("mongodb://localhost:27017");
+  const client = await MongoClient.connect(process.env.MONGO_URI);
   database = client.db("online-shop");
 }
 
