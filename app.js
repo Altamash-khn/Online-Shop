@@ -5,7 +5,6 @@ const express = require("express");
 const csrf = require("@dr.pogodin/csurf");
 const expressSession = require("express-session");
 
-
 const authRoutes = require("./routes/auth-routes");
 const productsRoutes = require("./routes/products-routes");
 const baseRoutes = require("./routes/base-routes");
@@ -23,7 +22,6 @@ const protectRoutesMiddleware = require("./middlewares/protect-routes");
 const cartMiddleWare = require("./middlewares/cart");
 const updateCartPricesMiddleware = require("./middlewares/update-cart-prices");
 const notFoundMiddleware = require("./middlewares/not-found");
-
 
 const app = express();
 
@@ -54,7 +52,7 @@ app.use("/orders", protectRoutesMiddleware, orderRoutes);
 
 app.use(notFoundMiddleware);
 
-// app.use(errorHandlerMiddleware);
+app.use(errorHandlerMiddleware);
 
 connectToDatabase()
   .then(() => app.listen(3000))
